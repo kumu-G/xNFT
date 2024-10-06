@@ -14,4 +14,4 @@ lib/
 node_modules/
 target/
 test-ledger/
-./id.json
+id.json
