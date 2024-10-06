@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "license": "GPL-3.0-only",
+  "workspaces": [
+    "typescript"
+  ],
+  "scripts": {
+    "build": "yarn idl && cargo build && cd ./typescript && yarn build",
+    "docs": "docsify serve ./docs",
+    "fmt:fix": "prettier \"*/**/*{.js,.cjs,.ts,.tsx,.json,.yaml,.md}\" -w",
+    "fmt": "prettier \"*/**/*{.js,.cjs,.ts,.tsx,.json,.yaml,.md}\" --check",
+    "idl": "anchor build && cp ./target/types/xnft.ts ./typescript/src && yarn fmt:fix",
+    "lint": "yarn fmt && cargo fmt --all --check && cargo clippy --all-targets -- -D warnings && cd ./typescript && yarn lint",
+    "test": "yarn idl && anchor test && cargo test && cd ./typescript && yarn test"
+  },
+  "devDependencies": {
+    "@coral-xyz/anchor": "^0.27.0",
+    "@metaplex-foundation/js": "^0.18.3",
+    "@solana/spl-token": "^0.3.7",
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^10.0.0",
+    "chai": "^4.3.6",
+    "docsify-cli": "^4.4.4",
+    "mocha": "^10.0.0",
+    "prettier": "^2.8.7",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.0.2"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "printWidth": 120
+  },
+  "packageManager": "yarn@3.5.0"
+}
